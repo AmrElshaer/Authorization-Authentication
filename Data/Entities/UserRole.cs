@@ -17,7 +17,7 @@ public class UserRoleConfiguration:IEntityTypeConfiguration<UserRole>
         builder.HasData(new UserRole()
         {
             UserId = 1,
-            RoleId = 1
+            RoleId = RoleEnum.Admin
         });
     }
 }

@@ -4,7 +4,7 @@ namespace Authorization.Features.Weathers;
 
 public class GetWeather:IEndpoint
 {
-    public void MapEndpoint(IEndpointRouteBuilder endpointRouteBuilder)
+    public void MapEndpoint(IEndpointRouteBuilder app)
     {
         
         var summaries = new[]
@@ -12,7 +12,7 @@ public class GetWeather:IEndpoint
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        endpointRouteBuilder.MapGet("/weatherforecast", () =>
+        app.MapGet("/weatherforecast", () =>
             {
                 var forecast = Enumerable.Range(1, 5).Select(index =>
                         new WeatherForecast
@@ -28,7 +28,7 @@ public class GetWeather:IEndpoint
             .WithTags(Tags.Weathers)
             .MapToApiVersion(1);
         
-        endpointRouteBuilder.MapGet("/weatherforecast", () =>
+        app.MapGet("/weatherforecast", () =>
             {
                 var forecast = Enumerable.Range(1, 5).Select(index =>
                         new WeatherForecast

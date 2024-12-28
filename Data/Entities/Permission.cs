@@ -12,9 +12,9 @@ public class Permission
 }
 public class PermissionEnum(string name, int value) : SmartEnum<PermissionEnum>(name, value)
 {
-    public static readonly PermissionEnum ReadUser = new PermissionEnum("ReadUser", 1);
-    public static readonly PermissionEnum CreateUser = new PermissionEnum("CreateUser", 2);
-    public static readonly PermissionEnum ReadWeathers = new PermissionEnum("ReadWeathers", 3);
+    public static readonly PermissionEnum ReadUser = new ("ReadUser", 1);
+    public static readonly PermissionEnum CreateUser = new ("CreateUser", 2);
+    public static readonly PermissionEnum ReadWeathers = new ("ReadWeathers", 3);
 }
 
 public class PermissionConfiguration:IEntityTypeConfiguration<Permission>

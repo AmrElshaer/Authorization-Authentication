@@ -51,7 +51,7 @@ public static class DependencyInjection
     private static IServiceCollection AddSystemAuthorization(this IServiceCollection serviceProvider)
     {
         serviceProvider.AddAuthorization();
-        serviceProvider.AddSingleton<IClaimsTransformation, CustomClaimsTransformation>(); 
+        serviceProvider.AddScoped<IClaimsTransformation, CustomClaimsTransformation>(); 
         serviceProvider.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
         serviceProvider.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
       
