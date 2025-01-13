@@ -1,4 +1,6 @@
 ﻿using Authorization.Data.Entities;
+using Authorization.Options;
+using Microsoft.Extensions.Options;
 
 namespace Authorization.Features.Weathers;
 
@@ -11,9 +13,10 @@ public class GetWeather:IEndpoint
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
-
-        app.MapGet("/weatherforecast", () =>
+        // you can using IoptionsSnipet for scoped configuration options
+        app.MapGet("/weatherforecast", (IOptions<HangFireOptions> hangFireOptions) =>
             {
+                
                 var forecast = Enumerable.Range(1, 5).Select(index =>
                         new WeatherForecast
                         (
@@ -42,7 +45,7 @@ public class GetWeather:IEndpoint
             })
             .WithName("GetWeatherForecastAuthorized")
             .WithTags(Tags.Weathers)
-            .RequireAuthorization(PermissionEnum.ReadWeathers.Name)
+            .RequireAuthorization(PermissionEnum.ReadWeathers.Name,PermissionEnum.ReadUser.Name)
             .MapToApiVersion(2);
         
 

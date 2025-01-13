@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Authorization.Data;
 using Authorization.Features;
+using Authorization.Options;
 using Authorization.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,6 +19,7 @@ public static class DependencyInjection
         return serviceProvider.AddAuthentication()
             .AddSystemAuthorization()
             .AddApplicationDbContext(configuration)
+            .AddOptions(configuration)
             .AddEndpoints(Assembly.GetExecutingAssembly());
     }
     private static IServiceCollection AddEndpoints(this IServiceCollection serviceProvider,
@@ -47,6 +49,17 @@ public static class DependencyInjection
        return serviceProvider.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+    }
+
+    private static IServiceCollection AddOptions(this IServiceCollection serviceProvider,IConfiguration configuration)
+    {
+        
+        // services.Configure<MySettings>(settings => 
+        // {
+        //    
+        // });
+        return serviceProvider.Configure<HangFireOptions>(configuration.GetSection("HangFire"))
+            .ConfigureOptions<HangFireOptionsConfiguration>();
     }
     private static IServiceCollection AddSystemAuthorization(this IServiceCollection serviceProvider)
     {
